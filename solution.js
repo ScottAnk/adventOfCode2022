@@ -2272,5 +2272,5 @@ const calorieTotals = parsedCalories.map(calorieList => {
     return sum
 })
 calorieTotals.sort((a,b) => a-b)
-console.log(calorieTotals[calorieTotals.length-1])
-console.log(calorieTotals[calorieTotals.length-1] + calorieTotals[calorieTotals.length-2] + calorieTotals[calorieTotals.length-3])
+console.log('single highest elf: ' + calorieTotals[calorieTotals.length-1])
+console.log('three highest elves: ' + calorieTotals[calorieTotals.length-1] + calorieTotals[calorieTotals.length-2] + calorieTotals[calorieTotals.length-3])
