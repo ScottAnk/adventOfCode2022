@@ -22,11 +22,24 @@ const backpackPriorities = puzzleInput.split('\n').map(backpack => {
     pocket2.sort((a,b) => a-b)
     return [pocket1, pocket2]
 })
-console.log('checkpoint')
-//loop over list of backpacks
-//split each string in half - save to different vars?
-//convert to numbers
-//sort the two halves
-//step over elements of array1, move pointer along until next array2 is greater than array1
-//store repeated element
-//sum element values
+const wrongItems = backpackPriorities.map(pockets =>{
+    let pocket1pointer = 0, pocket2pointer = 0
+    const limit = pockets[0].length
+    for (pocket1pointer = 0; pocket1pointer < limit; pocket1pointer++) {
+        if (pockets[0][pocket1pointer] === pockets[1][pocket2pointer]){
+            return pockets[0][pocket1pointer]
+        } else if (pockets[0][pocket1pointer] < pockets[1][pocket2pointer]){
+            continue
+        } else {
+            while (pockets[0][pocket1pointer] > pockets[1][pocket2pointer]){
+                pocket2pointer++
+            }
+            if (pockets[0][pocket1pointer] === pockets[1][pocket2pointer]){
+                return pockets[0][pocket1pointer]
+            }
+        }
+    }
+
+})
+const total = wrongItems.reduce((prevValue,curValue) => prevValue + curValue)
+console.log(`the total priority of misplaced items: ${total}`)
