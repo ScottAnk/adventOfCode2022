@@ -9,7 +9,7 @@ for (let i = 0; i<52; i++){
     itemPriorities[alphabet[i]] = i+1
 }
 
-const backpackPriorities = puzzleInput.split('\n').map(backpack => {
+const backpackWithPockets = puzzleInput.split('\n').map(backpack => {
     const pocket1 = [], pocket2 = []
     const dividerPoint = backpack.length/2
     for (let i = 0; i < dividerPoint; i++) {
@@ -20,20 +20,27 @@ const backpackPriorities = puzzleInput.split('\n').map(backpack => {
     }
     pocket1.sort((a,b) => a-b)
     pocket2.sort((a,b) => a-b)
-    return [pocket1, pocket2]
+    return pocket1.concat(pocket2)
 })
-const wrongItems = backpackPriorities.map(pockets =>{
-    let pocket1pointer = 0, pocket2pointer = 0
-    const limit = pockets[0].length
+const wrongItems = backpackWithPockets.map(backpack =>{
+    let pocket1pointer = 0
+    let pocket2pointer = backpack.length/2
+    const limit = backpack.length/2
     for (pocket1pointer = 0; pocket1pointer < limit; pocket1pointer++) {
-        while (pockets[0][pocket1pointer] > pockets[1][pocket2pointer]){
+        while (backpack[pocket1pointer] > backpack[pocket2pointer]){
             pocket2pointer++
         }
-        if (pockets[0][pocket1pointer] === pockets[1][pocket2pointer]){
-            return pockets[0][pocket1pointer]
+        if (backpack[pocket1pointer] === backpack[pocket2pointer]){
+            return backpack[pocket1pointer]
         }
     }
-
 })
 const total = wrongItems.reduce((prevValue,curValue) => prevValue + curValue)
 console.log(`the total priority of misplaced items: ${total}`)
+//loop over list of backpacks
+//split each string in half - save to different vars?
+//convert to numbers
+//sort the two halves
+//step over elements of array1, move pointer along until next array2 is greater than array1
+//store repeated element
+//sum element values
