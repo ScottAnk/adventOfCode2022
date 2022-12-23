@@ -35,12 +35,37 @@ const wrongItems = backpackWithPockets.map(backpack =>{
         }
     }
 })
+const backpackPriorities = backpackWithPockets.map(backpack => 
+    backpack.sort((a,b) => a-b))
+const groupBadges = []
+for (let i = 0; i < backpackPriorities.length; i = i + 3) {
+    //using two pointer search: look for same items in first two backpacks
+    //using two pointer search: look for matching item between first list and third backpack
+    let pointer1 = 0, pointer2 = 0
+    const matchingItems = []
+    for (pointer1 = 0; pointer1 < backpackPriorities[i].length; pointer1++) {
+        const val1 = backpackPriorities[i][pointer1]
+        while (val1 > backpackPriorities[i+1][pointer2]) {
+            pointer2++
+        }
+        if (val1 === backpackPriorities[i+1][pointer2]){
+            matchingItems.push(val1)
+        }
+    }
+    pointer2 = 0
+    for (pointer1 = 0; pointer1 < matchingItems.length; pointer1++){
+        const val1 = matchingItems[pointer1]
+        while (val1 > backpackPriorities[i+2][pointer2]){
+            pointer2++
+        }
+        if (val1 === backpackPriorities[i+2][pointer2]){
+            groupBadges.push(val1)
+            break
+        }
+    }
+}
+console.log(`sanity check: ${(groupBadges.length === backpackPriorities.length/3) ? 'pass' : 'fail'}`)
 const total = wrongItems.reduce((prevValue,curValue) => prevValue + curValue)
 console.log(`the total priority of misplaced items: ${total}`)
-//loop over list of backpacks
-//split each string in half - save to different vars?
-//convert to numbers
-//sort the two halves
-//step over elements of array1, move pointer along until next array2 is greater than array1
-//store repeated element
-//sum element values
+const groupBadgeTotal = groupBadges.reduce((prevValue,curValue) => prevValue + curValue)
+console.log(`sum of group badges: ${groupBadgeTotal}`)
