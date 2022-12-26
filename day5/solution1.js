@@ -34,4 +34,4 @@ for (rowPointer; rowPointer < puzzleInput.length; rowPointer++) {
         piles[target-1].push(piles[source-1].pop())
 }
 
-console.log(`crates on top: ${piles.map(pile=>pile.pop())}`)
+console.log(`crates on top: ${piles.map(pile=>pile.pop()).reduce((concat, next) => concat += next)}`)
