@@ -2263,14 +2263,21 @@ calories = `11334
 8942
 6865
 1691`
-const parsedCalories = calories.split("\n\n").map(element => element.split('\n'))
-const calorieTotals = parsedCalories.map(calorieList => {
-    let sum=0
-    for (let i=0; i<calorieList.length; i++){
-        sum += Number(calorieList[i])
-    }
-    return sum
+const parsedCalories = calories
+  .split('\n\n')
+  .map((element) => element.split('\n'))
+const calorieTotals = parsedCalories.map((calorieList) => {
+  let sum = 0
+  for (let i = 0; i < calorieList.length; i++) {
+    sum += Number(calorieList[i])
+  }
+  return sum
 })
-calorieTotals.sort((a,b) => a-b)
-console.log('single highest elf: ' + calorieTotals[calorieTotals.length-1])
-console.log('three highest elves: ' + calorieTotals[calorieTotals.length-1] + calorieTotals[calorieTotals.length-2] + calorieTotals[calorieTotals.length-3])
+calorieTotals.sort((a, b) => a - b)
+console.log('single highest elf: ' + calorieTotals[calorieTotals.length - 1])
+console.log(
+  'three highest elves: ' +
+    calorieTotals[calorieTotals.length - 1] +
+    calorieTotals[calorieTotals.length - 2] +
+    calorieTotals[calorieTotals.length - 3]
+)
